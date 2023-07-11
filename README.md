@@ -15,3 +15,5 @@
 - Udah sih itu aja
 
 > Mungkin ntar bisa ditambah fiturnya, aamiin
+
+**Functional Key:** `all number`, `(`, `)`, `+`, `-`, `/,` `*`, `=`, `PI`, `ANS`, `.`, `DEL`, `CA`
