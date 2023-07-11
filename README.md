@@ -4,6 +4,10 @@
 
 ---
 
+## Resonsiveness
+
+- Cuma responsive di ukuran kalkulator sama font aja sih, karena ya gitu-gitu aja kalkulator mah
+
 ## Features
 
 - Bisa basic operator kayak `+` `-` `x` `/`
