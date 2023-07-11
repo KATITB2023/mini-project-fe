@@ -1,10 +1,12 @@
-Silahkan berkreasi menggunakan templat di atas, cukup di halaman index saja. Tetapi, page harus responsive ya. Setelah itu, lakukan hal berikut:
+# Scientific Calculator (Palsu)
 
-- Push ke branch sesuai dengan developer workflow
-- Buat pull request ke master
+        Ceritanya sih kalkulator
 
-## How to Run
+---
+## Features
 
-- Jangan lupa clone repo ini
-- Buka terminal, lalu ketikkan `yarn install`
-- Setelah itu, ketikkan `yarn dev`
+- Bisa basic operator kayak `+` `-` `x` `/`
+- Bisa on/off
+- Udah sih itu aja
+
+> Mungkin ntar bisa ditambah fiturnya, aamiin

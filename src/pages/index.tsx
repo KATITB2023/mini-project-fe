@@ -288,8 +288,8 @@ export default function Home() {
 					</ModalContent>
 				</Modal>
 				<Link
-          href='https://github.com/soezyxst/pr-1'
-          target='_blank'
+					href='https://github.com/KATITB2023/mini-project-fe/tree/feat/adi-information'
+					target='_blank'
 					position='absolute'
 					top='1rem'
 					left='1rem'
