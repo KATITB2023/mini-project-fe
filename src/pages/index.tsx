@@ -20,6 +20,14 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
 
+function cV(ref: MutableRefObject<HTMLInputElement>) {
+	return ref.current.value;
+}
+
+function clear(ref: MutableRefObject<HTMLInputElement>) {
+	ref.current.value = '';
+}
+
 export default function Home() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -39,16 +47,16 @@ export default function Home() {
 		'itgr',
 		'd/dx',
 		'convt',
-		'pars',
 		'root',
 		'exp',
 		'sqr',
 		'log',
+		'abs',
 		'sin',
 		'cos',
 		'tan',
-		'abs',
-		'pers',
+		'(',
+		')',
 		7,
 		8,
 		9,
@@ -94,6 +102,8 @@ export default function Home() {
 		'pi',
 		'on',
 		'off',
+		'(',
+		')',
 	];
 
 	const pi = Math.PI;
@@ -117,62 +127,77 @@ export default function Home() {
 		}
 
 		if (isError) {
-			displayRef.current.value = '';
+			clear(displayRef);
+			clear(answerRef);
+			clear(operatorRef);
 			setIsError(false);
 		}
 
 		try {
 			if (functionalKey.includes(content)) {
 				if (content === 'off') {
-					displayRef.current.value = '';
-					operatorRef.current.value = '';
-					answerRef.current.value = '';
+					clear(displayRef);
+					clear(operatorRef);
+					clear(answerRef);
 					setIsOn(false);
 					return;
 				}
 				if (displayOnly) {
-					if (Number(content) || content === '0' || content === '.') {
-						displayRef.current.value = content;
-						return;
-					}
 					setDisplayOnly(false);
-				}
-				if (Number(content) || ['0', 'pi', '.'].includes(content)) {
-					if (content === 'pi') {
-						displayRef.current.value =
-							displayRef.current.value.concat(`\u03C0`);
+					if (Number(content) || content === '0' || content === '.') {
+						clear(answerRef);
+						clear(operatorRef);
+						displayRef.current.value = content;
+					} else if (['+', '-', '*', '/'].includes(content)) {
+						operatorRef.current.value = content;
+						answerRef.current.value = `${answer}`;
+						clear(displayRef);
 					} else {
-						displayRef.current.value = displayRef.current.value.concat(content);
+						clear(displayRef);
+						clear(answerRef);
+						clear(operatorRef);
+					}
+					return;
+				}
+				if (Number(content) || ['0', 'pi', '.', ')', '('].includes(content)) {
+					if (content === 'pi') {
+						displayRef.current.value = cV(displayRef).concat(`\u03C0`);
+					} else {
+						displayRef.current.value = cV(displayRef).concat(content);
 					}
 				} else if (['+', '-', '/', '*'].includes(content)) {
+					answerRef.current.value =
+						cV(answerRef) + ' ' + cV(operatorRef) + ' ' + cV(displayRef);
 					operatorRef.current.value = content;
-					answerRef.current.value = displayRef.current.value;
-					displayRef.current.value = '';
+					clear(displayRef);
 				} else {
 					switch (content) {
 						case 'ca':
-							displayRef.current.value = '';
-							operatorRef.current.value = '';
-							answerRef.current.value = '';
+							clear(displayRef);
+							clear(answerRef);
+							clear(operatorRef);
 							break;
 						case 'del':
-							displayRef.current.value = displayRef.current.value.slice(0, -1);
+							displayRef.current.value = cV(displayRef).slice(0, -1);
 							break;
-						case '=':
-							displayRef.current.value = eval(
-								answerRef.current.value +
-									operatorRef.current.value +
-									displayRef.current.value
-							);
-							setAnswer(Number(displayRef.current.value));
-							answerRef.current.value = '';
-							operatorRef.current.value = '';
-							setDisplayOnly(true);
-							break;
+            case '=':
+              if (cV(answerRef).split(' ').join('') && cV(displayRef) && cV(operatorRef)) {
+                let curAns = cV(answerRef)
+                answerRef.current.value =
+                  cV(answerRef) + ' ' + cV(operatorRef) + ' ' + cV(displayRef);
+                displayRef.current.value = eval(
+                  curAns + cV(operatorRef) + cV(displayRef)
+                );
+                setAnswer(Number(cV(displayRef)));
+                displayRef.current.value = '= ' + cV(displayRef);
+                clear(operatorRef);
+                setDisplayOnly(true);
+                return;
+              }
+              setIsError(true);
+              break;
 						case 'ans':
 							displayRef.current.value = `${answer}`;
-							break;
-						default:
 							break;
 					}
 				}
