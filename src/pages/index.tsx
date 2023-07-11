@@ -240,7 +240,7 @@ export default function Home() {
 								<Input
 									readOnly
 									ref={displayRef}
-									placeholder={isOn ? 'Number' : 'OFF'}
+									placeholder={isOn ? 'Input Number Here' : 'OFF'}
 									textAlign='end'
 									height='auto'
 									border='none'
