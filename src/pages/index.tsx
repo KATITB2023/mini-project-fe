@@ -80,7 +80,8 @@ export default function Home() {
           </Stack>
         ))}
         <Center as='footer' mt={4} color={colorMode === 'light' ? 'gray.500' : 'gray.300'} fontSize='sm'>
-          Created by Austin Gabriel Pardosi, 2023
+          Created by Austin Gabriel Pardosi, 2023 
+          
         </Center>
       </VStack>
     </Center>
