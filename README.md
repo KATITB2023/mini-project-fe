@@ -7,6 +7,7 @@
 ## Resonsiveness
 
 - Cuma responsive di ukuran kalkulator sama font aja sih, karena ya gitu-gitu aja kalkulator mah
+- Beberapa card berubah sesuai ukuran screen
 
 ## Features
 
