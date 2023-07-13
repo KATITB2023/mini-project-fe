@@ -1,11 +1,46 @@
+:root
+{
+  --scrollVar: 0;
+}
+
 html,
-body {
+body
+{
   padding: 0;
   margin: 0;
   user-select: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-a {
+a
+{
   color: inherit;
   text-decoration: none;
+}
+
+@keyframes nyutnyut
+{
+  50%
+  {
+    opacity: 10%;
+  }
+
+  100%
+  {
+    opacity: 100%;
+  }
+}
+
+@keyframes atasbawah
+{
+  50%
+  {
+    bottom: 2rem;
+  }
+
+  100%
+  {
+    bottom: 0;
+  }
 }
